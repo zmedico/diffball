@@ -709,6 +709,7 @@ cseek(cfile *cfh, ssize_t offset, int offset_type)
 			if(lzma_stream_decoder(cfh->xzs, UINT64_MAX, LZMA_TELL_UNSUPPORTED_CHECK)!=LZMA_OK) {
 				return IO_ERROR;
 			}
+			cfh->xzs->avail_in = cfh->xzs->avail_out = 0;
 			cfh->raw.pos = cfh->raw.offset = cfh->raw.end = cfh->data.pos =
 				cfh->data.offset = cfh->data.end = 0;
 			if(ensure_lseek_position(cfh)) {
